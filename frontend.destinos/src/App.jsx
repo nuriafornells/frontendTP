@@ -1,3 +1,4 @@
+//cd frontendTP\frontend.destinos
 import './App.css'
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
@@ -157,7 +158,7 @@ const Destinos = () => {
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Ej: París, Francia"
+                      placeholder="Ej: Francia"
                     />
                   </div>
                   <div>
