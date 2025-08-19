@@ -1,4 +1,3 @@
-//cd frontendTP\frontend.destinos
 import './App.css'
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
@@ -14,7 +13,7 @@ const Destinos = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     descripcion: '',
-    precio: '',
+    pais: '',
     disponible: true
   });
 
@@ -77,7 +76,7 @@ const Destinos = () => {
     setFormData({
       nombre: destino.nombre,
       descripcion: destino.descripcion,
-      precio: destino.precio,
+      pais: destino.pais,
       disponible: destino.disponible
     });
     setShowForm(true);
@@ -103,7 +102,7 @@ const Destinos = () => {
     setFormData({
       nombre: '',
       descripcion: '',
-      precio: '',
+      pais: '',
       disponible: true
     });
     setEditingDestino(null);
@@ -119,17 +118,24 @@ const Destinos = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-gray-50 min-h-screen">
+    <div className="max-w-6xl mx-auto p-8 bg-gray-50 min-h-screen">
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Gestor de Destinos</h1>
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">Carga de Destinos  </h1>
+          
+    
           <button
+             
             onClick={() => setShowForm(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+            
+            className=" bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
           >
-            <Plus size={18} />
-            Nuevo Destino
+           
+            <Plus size={12}  />
+             
+              Agregar nuevo Destino
           </button>
+       
         </div>
 
         {error && (
@@ -158,17 +164,17 @@ const Destinos = () => {
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Ej: Francia"
+                      placeholder="Ej: París, Francia"
                     />
                   </div>
                   <div>
                     <label className="titulo-input">
-                      Precio
+                      pais
                     </label>
                     <input
                       type="number"
-                      name="precio"
-                      value={formData.precio}
+                      name="pais"
+                      value={formData.pais}
                       onChange={handleInputChange}
                       required
                       min="0"
@@ -224,51 +230,57 @@ const Destinos = () => {
             </form>
           </div>
         )}
-
         {/* Lista de destinos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {destinos.map((destino) => (
-            <div key={destino.id} className="bg-white border rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="p-4">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-lg font-semibold text-gray-800">{destino.nombre}</h3>
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${
-                    destino.disponible
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-red-100 text-red-800'
-                  }`}>
-                    {destino.disponible ? 'Disponible' : 'No disponible'}
-                  </span>
-                </div>
-                <p className="text-gray-600 text-sm mb-3">{destino.descripcion}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-blue-600">
-                    ${Number(destino.precio).toFixed(2)}
-                  </span>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleEdit(destino)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-md transition-colors"
-                    >
-                      <Edit size={16} />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(destino.id)}
-                      className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md transition-colors"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {destinos.map((destino) => (
+    <div
+      key={destino.id}
+      className="bg-white border rounded-lg shadow-sm hover:shadow-md transition-shadow p-4"
+    >
+      <div className="flex justify-between items-start mb-3">
+        <h3 className="text-base font-bold text-gray-800">{destino.nombre}</h3>
+        <span
+          className={`px-2 py-1 rounded text-xs font-medium ${
+            destino.disponible
+              ? 'bg-green-100 text-green-800'
+              : 'bg-red-100 text-red-800'
+          }`}
+        >
+          {destino.disponible ? 'Disponible' : 'No disponible'}
+        </span>
+      </div>
+
+      <p className="text-gray-600 text-sm mb-4">{destino.descripcion}</p>
+
+      <div className="flex justify-between items-center">
+        <span className="text-lg font-semibold text-blue-600">
+          ${Number(destino.pais).toFixed(2)}
+        </span>
+        <div className="flex gap-2">
+          <button
+            onClick={() => handleEdit(destino)}
+            className="bg-blue-500 hover:bg-blue-600 text-white p-1.5 rounded-md transition-colors"
+          >
+            <Edit size={14} />
+          </button>
+          <button
+            onClick={() => handleDelete(destino.id)}
+            className="bg-red-500 hover:bg-red-600 text-white p-1.5 rounded-md transition-colors"
+          >
+            <Trash2 size={14} />
+          </button>
         </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+       
 
         {destinos.length === 0 && !loading && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No hay destinos registrados</p>
-            <p className="text-gray-400">Agrega tu primer destino haciendo clic en "Nuevo Destino"</p>
+            <p className="text-gray-500 text-lg">(No hay destinos registrados)</p>
+            <p className="text-gray-400">Agregá el primer destino haciendo clic en "Nuevo Destino"</p>
           </div>
         )}
       </div>
